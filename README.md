@@ -1,5 +1,6 @@
 # Fullstack Webstore project in React.js and Nest.js
 
+## deployed on AWS EC2: https://webstore.tonigrbic.online
 ## Run the app
 
 1. In apps/Backend .env file put your values for JWT_TOKEN and DATABASE_URL
