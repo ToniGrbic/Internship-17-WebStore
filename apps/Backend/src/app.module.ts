@@ -1,14 +1,15 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CartsModule } from './carts/cart-items.module';
+import { RateLimiterMiddleware } from './middleware/limiter.middleware';
+import { OrdersModule } from './orders/orders.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
-import { OrdersModule } from './orders/orders.module';
-import { CartsModule } from './carts/cart-items.module';
 import { WishlistsModule } from './wishlists/wishlists.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 @Module({
   imports: [
@@ -25,4 +26,10 @@ import { join } from 'path';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // Apply the logger middleware globally to all routes
+    consumer.apply(RateLimiterMiddleware).forRoutes('*');
+  }
+}
