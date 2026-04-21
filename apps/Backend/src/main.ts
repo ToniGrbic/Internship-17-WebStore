@@ -14,7 +14,7 @@ async function bootstrap() {
     }),
   );
 
-  app.use("trust proxy", 1);
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
 
   const config = new DocumentBuilder()
     .addBearerAuth()
