@@ -3,6 +3,12 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.wishListItem.deleteMany({});
+  await prisma.order.deleteMany({});
+  await prisma.user.deleteMany({});
+  await prisma.product.deleteMany({});
+  await prisma.store.deleteMany({});
+
   const store = await prisma.store.upsert({
     where: { name: 'WebStore1' },
     update: {},
@@ -16,7 +22,7 @@ async function main() {
     update: {},
     create: {
       title: 'Fjallraven - Foldsack No. 1 Backpack',
-      image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+      image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png',
       description:
         'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
       price: 109.95,
@@ -32,12 +38,12 @@ async function main() {
     update: {},
     create: {
       title:
-        "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+        "Mens Casual Premium Slim Fit T-Shirts",
       price: 695,
       description:
         "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
       category: 'jewelery',
-      image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
+      image: 'https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png',
       rating: 4.0,
       ratingCount: 15,
       storeId: 1,
@@ -53,7 +59,7 @@ async function main() {
       description:
         'USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system',
       category: 'electronics',
-      image: 'https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg',
+      image: 'https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_t.png',
       rating: 4.2,
       ratingCount: 20,
       storeId: 1,
